@@ -1,0 +1,33 @@
+{
+  "name": "autopurge",
+  "main": "autopurge.js",
+  "version": "1.0.0",
+  "homepage": "https://github.com/KyleRoss/AutoPurge",
+  "description": "Automatically purge old items from an array once it hits a certain length",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "purge",
+    "array",
+    "length",
+    "maxlength",
+    "clean",
+    "auto",
+    "limit"
+  ],
+  "authors": [
+    "Kyle Ross"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "test.js"
+  ]
+}

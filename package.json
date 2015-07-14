@@ -1,0 +1,34 @@
+{
+  "name": "autopurge",
+  "version": "1.0.0",
+  "description": "Automatically purge old items from an array once it hits a certain length",
+  "main": "autopurge.js",
+  "scripts": {
+    "test": "mocha test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KyleRoss/AutoPurge.git"
+  },
+  "keywords": [
+    "purge",
+    "array",
+    "length",
+    "maxlength",
+    "clean",
+    "auto",
+    "limit"
+  ],
+  "author": "Kyle Ross",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/KyleRoss/AutoPurge/issues"
+  },
+  "homepage": "https://github.com/KyleRoss/AutoPurge",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-uglify": "^0.9.1",
+    "mocha": "^2.2.5",
+    "should": "^7.0.2"
+  }
+}
