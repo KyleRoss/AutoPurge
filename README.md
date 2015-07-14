@@ -10,9 +10,9 @@ Install the AutoPurge module.
 
     npm install autopurge
 
-
-    var AutoPurge = require('autopurge');
-
+```javascript
+var AutoPurge = require('autopurge');
+```
 
 ### Bower
 
@@ -23,32 +23,35 @@ Download `autopurge.js` or `autopurge.min.js` in the repository and include in y
 
 ### Browser
 
-    <script type="text/javascript" src="path/to/autopurge.min.js"></script>
-
+```html
+<script type="text/javascript" src="path/to/autopurge.min.js"></script>
+```
 
 ## Example
-    
-    var myArray = ['test', 'value', true, false, 1, 20],
-        purge = new AutoPurge(10, myArray);
-    
-    purge.push('new value'); // => 0 (no records purged)
-    purge.length; // => 7
-    purge.value; // => ['test', 'value', true, false, 1, 20, 'new value']
-    purge.push.apply(purge, [1, 2, 3, 4, 5]); // => 2 (records purged)
-    purge.value; // => [true, false, 1, 20, 'new value', 1, 2, 3, 4, 5]
-    
-    purge.purge(2); // => [true, false]
-    purge.length; // => 8
-    
-    // Array modified outside of AutoPurge?
-    myArray.push('modifying', 'outside', 'does', 'not', 'purge');
-    purge.length; // => 13 (over the maxlength!)
-    purge.auto(); // => [1, 20, 'new value']
-    purge.length; // => 3
-    
-    purge.clear();
-    purge.value; // => []
-    purge.length; // => 0
+
+```javascript
+var myArray = ['test', 'value', true, false, 1, 20],
+    purge = new AutoPurge(10, myArray);
+
+purge.push('new value'); // => 0 (no records purged)
+purge.length; // => 7
+purge.value; // => ['test', 'value', true, false, 1, 20, 'new value']
+purge.push.apply(purge, [1, 2, 3, 4, 5]); // => 2 (records purged)
+purge.value; // => [true, false, 1, 20, 'new value', 1, 2, 3, 4, 5]
+
+purge.purge(2); // => [true, false]
+purge.length; // => 8
+
+// Array modified outside of AutoPurge?
+myArray.push('modifying', 'outside', 'does', 'not', 'purge');
+purge.length; // => 13 (over the maxlength!)
+purge.auto(); // => [1, 20, 'new value']
+purge.length; // => 3
+
+purge.clear();
+purge.value; // => []
+purge.length; // => 0
+```
 
 ## API Documentation
 
@@ -61,10 +64,12 @@ Required | Argument      | Type      | Description
 No       | maxlength     | Number    | The maxlength the array can be. Default is `50`.
 No       | array         | Array     | An external array to use. Default is `[]`.
 
-    var purge = new AutoPurge();
-    var purge2 = AutoPurge(10);
-    var purge3 = AutoPurge(null, ['custom', 'array']);
-    var purge4 = new AutoPurge(10, ['custom', 'array']);
+```javascript
+var purge = new AutoPurge();
+var purge2 = AutoPurge(10);
+var purge3 = AutoPurge(null, ['custom', 'array']);
+var purge4 = new AutoPurge(10, ['custom', 'array']);
+```
 
 Returns `AutoPurge`
 
@@ -75,9 +80,11 @@ Required | Argument      | Type      | Description
 -------- | ------------- | --------- | ------------
 Yes      | ...           | Any       | Each item to push to the array as a separate argument.
 
-    purge.push('new item');
-    purge.push(1, 2, 'test', false);
-    purge.push.apply(purge, [1, 2, 3, 4, 5]);
+```javascript
+purge.push('new item');
+purge.push(1, 2, 'test', false);
+purge.push.apply(purge, [1, 2, 3, 4, 5]);
+```
 
 Returns `Number` (the number of items purged as result of the push)
 
@@ -88,40 +95,46 @@ Required | Argument      | Type               | Description
 -------- | ------------- | ------------------ | ------------
 No       | num           | Number/String/null | The number of items to remove, `null`, `undefined`, or `'all'` to remove all items.
 
-    var purge = new AutoPurge(10, ['custom', 'array', 1, 2, 3, 4]);
-    purge.purge(2); // => ['custom', 'array']
-    
-    purge.purge(); // => [1, 2, 3, 4]
-    purge.value; // => []
-    purge._purged; // => 6
+```javascript
+var purge = new AutoPurge(10, ['custom', 'array', 1, 2, 3, 4]);
+purge.purge(2); // => ['custom', 'array']
+
+purge.purge(); // => [1, 2, 3, 4]
+purge.value; // => []
+purge._purged; // => 6
+```
 
 Returns `Array` (the items purged from the array)
 
 #### AutoPurge.auto()
 If the array is modified without using any of the API methods, you will need to purge it. This will purge the array if the length of the array is greater than `maxlength`.
 
-    var arr = ['custom', 'array', 1, 2, 3, 4, true, false, {}, []],
-        purge = new AutoPurge(10, arr);
-    
-    purge.length; // => 10
-    arr.push('not', 'using', 'AutoPurge');
-    purge.length; // => 13
-    
-    purge.auto(); // => ['custom', 'array', 1]
-    purge.length; // => 13
+```javascript
+var arr = ['custom', 'array', 1, 2, 3, 4, true, false, {}, []],
+    purge = new AutoPurge(10, arr);
+
+purge.length; // => 10
+arr.push('not', 'using', 'AutoPurge');
+purge.length; // => 13
+
+purge.auto(); // => ['custom', 'array', 1]
+purge.length; // => 13
+```
 
 Returns `Array` (the items purged from the array)
 
 #### AutoPurge.clear()
 Clears the array and resets the `_purged` counter back to 0.
 
-    var purge = new AutoPurge(10, ['custom', 'array', 1, 2, 3, 4]);
-    purge.purge(2); // => ['custom', 'array']
-    purge._purged; // => 2
-    
-    purge.clear();
-    purge.value; // => []
-    purge._purged; // => 0
+```javascript
+var purge = new AutoPurge(10, ['custom', 'array', 1, 2, 3, 4]);
+purge.purge(2); // => ['custom', 'array']
+purge._purged; // => 2
+
+purge.clear();
+purge.value; // => []
+purge._purged; // => 0
+```
 
 Returns `undefined`
 
